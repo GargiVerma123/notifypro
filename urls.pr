@@ -1,0 +1,8 @@
+# leads/urls.py
+from django.urls import path
+from .views import LeadAPIView
+
+urlpatterns = [
+    path('lead/', LeadAPIView.as_view(), name='lead-list'),  # To create or list leads
+    path('lead/<str:customer_id>/', LeadAPIView.as_view(), name='lead-detail'),  # To get, update or delete a specific lead
+]

@@ -1,14 +1,18 @@
-# inventory1/models.py
+# leads/models.py
 from django.db import models
-from customer.models import Customer  # Ensure this points to the correct location
 
-class Inventory(models.Model):
-    flat = models.CharField(max_length=100)
-    image_name = models.CharField(max_length=255)
-    price = models.FloatField()
-    address = models.CharField(max_length=255)
-    description = models.TextField()
-    customer = models.ForeignKey(Customer, on_delete=models.CASCADE, related_name='inventory_items')
+class Lead(models.Model):
+    customer_id = models.CharField(max_length=100, primary_key=True)  # Use a unique ID for the lead
+    name = models.CharField(max_length=255)
+    phone = models.CharField(max_length=15)
+    email = models.EmailField()
+    summary = models.TextField()
+    status = models.CharField(max_length=50, choices=[
+        ('new', 'New'),
+        ('contacted', 'Contacted'),
+        ('converted', 'Converted'),
+        ('closed', 'Closed'),
+    ])
 
     def __str__(self):
-        return f"{self.flat} ({self.customer.name})"
+        return self.name
