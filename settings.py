@@ -40,7 +40,12 @@ INSTALLED_APPS = [
     "rest_framework",
     "user",
     "customer",
-]
+    "inventory",
+    "inventory1",
+    "customer1",
+    "lead",
+    "list",
+    ]
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
