@@ -1,11 +1,14 @@
-# inventory1/serializers.py
 from rest_framework import serializers
-from .models import Inventory
-from customer.models import Customer  # Ensure the import path is correct
+from .models import List, Customer
 
-class InventorySerializer(serializers.ModelSerializer):
-    customer_id = serializers.PrimaryKeyRelatedField(queryset=Customer.objects.all(), source='customer')
-
+class ListSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Inventory
-        fields = ['id', 'flat', 'image_name', 'price', 'address', 'description', 'customer_id']
+        model = List
+        fields = ['id', 'customer', 'address']
+
+class CustomerSerializer(serializers.ModelSerializer):
+    addresses = ListSerializer(many=True, read_only=True)
+    
+    class Meta:
+        model = Customer
+        fields = ['id', 'customer_id', 'name', 'addresses']

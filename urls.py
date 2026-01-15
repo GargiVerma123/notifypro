@@ -1,8 +1,7 @@
-# inventory1/urls.py
 from django.urls import path
-from .views import InventoryAPIView
+from .views import ListAPIView
 
 urlpatterns = [
-    path('inventory/', InventoryAPIView.as_view(), name='inventory-list-create'),  # For GET and POST
-    path('inventory/<int:id>/', InventoryAPIView.as_view(), name='inventory-detail'),  # For GET, PUT, DELETE (with id)
+    path('addresses/', ListAPIView.as_view(), name='address-list'),  # List all addresses or create new
+    path('addresses/<str:customer_id>/', ListAPIView.as_view(), name='address-detail'),  # Get, update, or delete by customer_id
 ]
