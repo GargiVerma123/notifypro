@@ -1,12 +1,14 @@
-# customer/models.py
+# inventory1/models.py
 from django.db import models
+from customer.models import Customer  # Ensure this points to the correct location
 
-class Customer(models.Model):
-    name = models.CharField(max_length=100)
-    email = models.EmailField(unique=True)
-    phone = models.CharField(max_length=10)
-    address = models.TextField(blank=True)
-    created_at = models.DateTimeField(auto_now_add=True)  # Automatically sets the creation date/time
+class Inventory(models.Model):
+    flat = models.CharField(max_length=100)
+    image_name = models.CharField(max_length=255)
+    price = models.FloatField()
+    address = models.CharField(max_length=255)
+    description = models.TextField()
+    customer = models.ForeignKey(Customer, on_delete=models.CASCADE, related_name='inventory_items')
 
     def __str__(self):
-        return self.name
+        return f"{self.flat} ({self.customer.name})"
